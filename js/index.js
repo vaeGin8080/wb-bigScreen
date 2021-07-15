@@ -1,488 +1,580 @@
 /**
  */
 $(function() {
-	console.log($("#char1"));
 	char1();
 	char2();
-	// char3();
-	// char4();
-
+	char3();
+	char4();
+	var line = null
+	$.getJSON('json/index/charPopup.json', function(res) {
+		console.log(res);
+		line = res
+		
+	})
+	$('.close').click(function() {
+		$('.popup').hide()
+	})
+	$('.tags').click(function() {
+		$('.popup').show()
+		$('.pop-title').text($(this).parent().find('.box-title').text())
+		char5(line);
+	})
 })
 //统计分析图
+// function char1() {
+
+// 	var myChart = echarts.init(document.getElementById('chart1'));
+// 	console.log(1);
+// 	$.getJSON('json/index/char1.json',function(res){
+// 		console.log(res);
+// 	})
+// 	var title = [
+// 		'精煤',
+// 		'原煤',
+// 		'混煤'
+// 	];
+// 	var total = 100
+// 	var t1 = 56
+// 	var t2 = 48
+// 	var t3 = 42
+// 	option = {
+// 		color: ["#F5A623", "#22F9B6", "#5B8FF9"],
+// 		legend: {
+// 			show: false,
+// 			orient: "vertical",
+// 			right: "0",
+// 			itemHeight: 10, //图例的高度
+// 			itemGap: 8, //图例之间的间距
+// 			textStyle: {
+// 				color: "#fff",
+// 			},
+// 			data: title,
+// 		},
+// 		series: [{
+// 				name: title[0],
+// 				type: "pie",
+// 				radius: ["70%", "80%"],
+// 				//环的位置
+// 				animation: false,
+// 				label: {
+// 					show: false,
+// 					position: "center",
+// 				},
+// 				labelLine: {
+// 					normal: {
+// 						show: false,
+// 					},
+// 				},
+// 				emphasis: {
+// 					scale: false,
+// 					label: {
+// 						show: true,
+// 						fontSize: "20",
+// 					},
+// 				},
+// 				data: [{
+// 						value: t1, //需要显示的数据
+// 						name: title[0],
+// 					},
+// 					{
+// 						value: total - t1,
+// 						itemStyle: {
+// 							normal: {
+// 								color: "#3A6D8C",
+// 							},
+// 						},
+// 					},
+// 				],
+// 			},
+// 			{
+// 				name: title[1],
+// 				type: "pie",
+// 				radius: ["50%", "60%"],
+// 				animation: false,
+// 				label: {
+// 					show: false,
+// 					position: "center",
+// 				},
+// 				labelLine: {
+// 					normal: {
+// 						show: false,
+// 					},
+// 				},
+// 				emphasis: {
+// 					scale: false,
+// 					label: {
+// 						show: true,
+// 						fontSize: "20",
+// 					},
+// 				},
+// 				data: [{
+// 						name: title[1],
+// 						value: t2,
+// 					},
+// 					{
+// 						value: total - t2,
+// 						itemStyle: {
+// 							normal: {
+// 								color: "#3A6D8C",
+// 							},
+// 						},
+// 					},
+// 				],
+// 			},
+// 			{
+// 				name: title[2],
+// 				type: "pie",
+// 				radius: ["30%", "40%"],
+// 				animation: false,
+// 				label: {
+// 					show: false,
+// 					position: "center",
+// 				},
+// 				labelLine: {
+// 					normal: {
+// 						show: false,
+// 					},
+// 				},
+// 				emphasis: {
+// 					scale: false,
+// 					label: {
+// 						show: true,
+// 						fontSize: "14",
+// 						fontWeight: "bold",
+// 					},
+// 				},
+// 				data: [{
+// 						name: title[2],
+// 						value: t3,
+// 					},
+// 					{
+// 						value: total - t3,
+// 						itemStyle: {
+// 							normal: {
+// 								color: "#3A6D8C",
+// 							},
+// 						},
+// 					},
+// 				],
+// 			},
+// 		],
+// 	};
+
+// 	myChart.setOption(option);
+// 	window.addEventListener('resize', function() {
+// 		myChart.resize();
+// 	})
+
+// }
 function char1() {
 
-	let myChart = echarts.init(document.getElementById('chart1'));
-	option = {
-		"dataset": {
-			show: false,
-			"source": [
-				["NAME", "DATA1", "DATA2", "DATA3"],
-				["缝制", "41.7", "58.3", "33.3"],
-				["后整理", "40.2", "59.8", "33.3"],
-				["面里料", "9.6", "90.4", "33.3"],
-				["包装", "6.3", "93.7", "33.3"],
-				["", "", "", "33.3"]
-			]
-		},
-		"color": [
-			"rgba(254,31,101,",
-			"rgba(255,176,1,",
-			"rgba(255,255,0,",
-			"rgba(66,171,69,",
-			"rgba(15,188,248,"
-		],
-		"grid": {
-			"top": "3%",
-			"right": "0",
-			"width": "50%",
-			"height": "50%",
-			"containLabel": false
-		},
-		"xAxis": {
-			"axisLine": {
-				"show": false
-			}
-		},
-		"yAxis": [{
-			"type": "category",
-			"inverse": true,
-			"axisLine": {
-				"show": false
+	var myChart = echarts.init(document.getElementById('chart1'));
+	$.getJSON('json/index/char1.json', function(res) {
+		option = {
+			tooltip: {
+				show: false,
+				trigger: 'item'
 			},
-			"axisTick": {
-				"show": false
-			},
-			"axisLabel": {
-				"show": true,
-				"interval": 0,
-				"inside": true,
-				"formatter": function(params) {
-					var str;
-					if (params == 1) {
-						str = "{rect" + params + "|}" + "{w1|" + option.dataset.source[params][0] +
-							"}" + "{w1|" + option.dataset.source[params][1] + "%}";
-					} else {
-						if (option.dataset.source[params][0]) {
-							str = "{rect" + params + "|}" + "{w2|" + option.dataset.source[params][0] +
-								"}" + "{w2|" + option.dataset.source[params][1] + "%}";
-						}
-					}
-					return str;
-				},
-				"rich": {
-					"rect1": {
-						"width": 12,
-						"height": 1,
-						"backgroundColor": "rgba(254,31,101,1)"
-					},
-					"rect2": {
-						"width": 12,
-						"height": 1,
-						"backgroundColor": "rgba(255,176,1,1)"
-					},
-					"rect3": {
-						"width": 12,
-						"height": 1,
-						"backgroundColor": "rgba(255,255,0,1)"
-					},
-					"rect4": {
-						"width": 12,
-						"height": 1,
-						"backgroundColor": "rgba(66,171,69,1)"
-					},
-					"rect5": {
-						"width": 12,
-						"height": 1,
-						"backgroundColor": "rgba(15,188,248,1)"
-					},
-					"w1": {
-						"width": 35,
-						"padding": [
-							0,
-							0,
-							0,
-							2
-						],
-						"fontSize": "{只能改数值,单位rem{0.5}$}",
-						"color": "rgba(254,31,101,1)"
-					},
-					"w2": {
-						"width": 35,
-						"padding": [
-							0,
-							0,
-							0,
-							2
-						],
-						"fontSize": "{只能改数值,单位rem{0.5}$}",
-						"color": "#fff"
-					}
+			legend: {
+				show: true,
+				orient: 'vertical',
+				left: 'right',
+				top: '3%',
+				textStyle: {
+					color: 'white'
 				}
 			},
-			"data": [
-				1,
-				2,
-				3,
-				4,
-				5
-			]
-		}],
-		"series": [{
-				"type": "pie",
-				"radius": [
-					"78%",
-					"90%"
-				],
-				"clockwise": false,
-				"hoverAnimation": false,
-				"labelLine": {
-					"show": false
+			series: [{
+				name: '',
+				type: 'pie',
+				radius: '60%',
+				label: {
+					color: '#fff',
+					formatter: '{b}:{d}%',
 				},
-				"itemStyle": {
-					"color": function(params) {
-						var colorList = [{
-								type: "linear",
-								x: 0,
-								y: 0,
-								x2: 0,
-								y2: 1,
-								colorStops: [{
-										offset: 0,
-										color: option.color[0] + "0.1)"
-									},
-									{
-										offset: 1,
-										color: option.color[0] + "1)"
-									}
-								],
-								global: false
-							},
-							option.color[0] + "0.1)", "rgba(0,0,0,0)"
-						];
-						return colorList[params.dataIndex];
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: '14',
+						fontWeight: 'bold'
 					}
 				},
-				"label": {
-					"show": false
-				},
-				"encode": {
-					"itemName": "NAME",
-					"value": 1
-				},
-				"seriesLayoutBy": "row"
-			},
-			{
-				"type": "pie",
-				"radius": [
-					"60%",
-					"72%"
-				],
-				"clockwise": false,
-				"hoverAnimation": false,
-				"labelLine": {
-					"show": false
-				},
-				"itemStyle": {
-					"color": function(params) {
-						var colorList = [{
-								type: "linear",
-								x: 0,
-								y: 0,
-								x2: 0,
-								y2: 1,
-								colorStops: [{
-										offset: 0,
-										color: option.color[1] + "0.1)"
-									},
-									{
-										offset: 1,
-										color: option.color[1] + "1)"
-									}
-								],
-								global: false
-							},
-							option.color[1] + "0.1)", "rgba(0,0,0,0)"
-						];
-						return colorList[params.dataIndex];
-					}
-				},
-				"label": {
-					"show": false
-				},
-				"encode": {
-					"itemName": "NAME",
-					"value": 2
-				},
-				"seriesLayoutBy": "row"
-			},
-			{
-				"type": "pie",
-				"radius": [
-					"42%",
-					"54%"
-				],
-				"clockwise": false,
-				"hoverAnimation": false,
-				"labelLine": {
-					"show": false
-				},
-				"itemStyle": {
-					"color": function(params) {
-						var colorList = [{
-								type: "linear",
-								x: 0,
-								y: 0,
-								x2: 0,
-								y2: 1,
-								colorStops: [{
-										offset: 0,
-										color: option.color[2] + "0.1)"
-									},
-									{
-										offset: 1,
-										color: option.color[2] + "1)"
-									}
-								],
-								global: false
-							},
-							option.color[2] + "0.1)", "rgba(0,0,0,0)"
-						];
-						return colorList[params.dataIndex];
-					}
-				},
-				"label": {
-					"show": false
-				},
-				"encode": {
-					"itemName": "NAME",
-					"value": 3
-				},
-				"seriesLayoutBy": "row"
-			},
-		]
-	};
-
-	myChart.setOption(option);
-	window.addEventListener('resize', function() {
-		myChart.resize();
+				data: res.data
+			}]
+		};
+		myChart.setOption(option);
+		window.addEventListener('resize', function() {
+			myChart.resize();
+		})
 	})
 
 }
 
 function char2() {
 
-	let myChart = echarts.init(document.getElementById('chart2'));
-
-	option = {
-		tooltip: {
-			show: false,
-			trigger: 'item'
-		},
-		legend: {
-			show: false,
-			top: '5%',
-			left: 'center'
-		},
-		series: [{
-			name: '访问来源',
-			type: 'pie',
-			radius: ['60%', '75%'],
-			avoidLabelOverlap: false,
-			itemStyle: {
-				borderColor: '#fff',
-				borderWidth: 2
-			},
-			label: {
+	var myChart = echarts.init(document.getElementById('chart2'));
+	$.getJSON('json/index/char2.json', function(res) {
+		var option = {
+			tooltip: {
 				show: false,
-				position: 'center'
+				trigger: 'item'
 			},
-			emphasis: {
+			legend: {
+				show: false,
+				top: '5%',
+				left: 'center'
+			},
+			series: [{
+				name: '访问来源',
+				type: 'pie',
+				radius: ['45%', '55%'],
+				avoidLabelOverlap: false,
+				itemStyle: {
+					borderColor: '#fff',
+					borderWidth: 2
+				},
 				label: {
-					show: true,
-					fontSize: '20',
-					fontWeight: 'bold'
-				}
-			},
-			labelLine: {
-				show: false
-			},
-			data: [{
-					value: 1048,
-					name: '搜索引擎'
+					color: '#fff',
+					formatter: '{b}:{d}%',
 				},
-				{
-					value: 735,
-					name: '直接访问'
+				emphasis: {
+					label: {
+						show: true,
+						fontSize: '20',
+						fontWeight: 'bold'
+					}
 				},
-				{
-					value: 580,
-					name: '邮件营销'
+				labelLine: {
+					show: true
 				},
-				{
-					value: 484,
-					name: '联盟广告'
-				},
-				{
-					value: 300,
-					name: '视频广告'
-				}
-			]
-		}]
-	};
+				data: res.data
+			}]
+		};
 
-	myChart.setOption(option);
-	window.addEventListener('resize', function() {
-		myChart.resize();
+		myChart.setOption(option);
+		window.addEventListener('resize', function() {
+			myChart.resize();
+		})
 	})
-
 }
 
 function char3() {
-
-	var myChart = echarts.init($("#char3")[0]);
-
-	option = {
-		legend: {
-			data: ['车辆行驶数量'],
-			textStyle: {
-				color: '#ffffff',
-
-			}
-		},
-		grid: {
-			show: 'true',
-			borderWidth: '0'
-		},
-
-		calculable: false,
-		tooltip: {
-			trigger: 'axis',
-			formatter: "Temperature : <br/>{b}km : {c}°C"
-		},
-		xAxis: [{
-			type: 'value',
-			axisLabel: {
-				formatter: '{value}',
-				textStyle: {
-					color: '#fff'
+	var myChart = echarts.init(document.getElementById('chart3'));
+	$.getJSON('json/index/char3.json', function(res) {
+		var data = res.data;
+		var className = res.titles;
+		var colorList = ['#39B3FF', '#47E0E0', '#7891D9', '#83D978', '#C7A530', '#FF8439'];
+		var defaultData = [100, 100, 100];
+		option = {
+			grid: {
+				left: '5%',
+				right: '5%',
+				bottom: '5%',
+				top: '15%',
+				containLabel: true
+			},
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'none'
+				},
+				formatter: function(params) {
+					return params[0].name + '<br/>' +
+						"<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:rgba(36,207,233,0.9)'></span>" +
+						params[0].value
 				}
 			},
-
-			splitLine: {
-				lineStyle: {
-					width: 0,
-					type: 'solid'
-				}
-			}
-		}],
-		yAxis: [{
-			type: 'category',
-			axisLine: {
-				onZero: false
+			xAxis: {
+				show: false,
+				type: 'value'
 			},
-			axisLabel: {
-				formatter: '{value} km',
-				textStyle: {
-					color: '#fff'
-				}
-			},
-			splitLine: {
-				lineStyle: {
-					width: 0,
-					type: 'solid'
-				}
-			},
-			boundaryGap: false,
-			data: ['0', '10', '20', '30', '40', '50', '60', '70', '80']
-		}],
-		series: [{
-			name: '车辆行驶数量',
-			type: 'line',
-			smooth: true,
-			itemStyle: {
-				normal: {
-					lineStyle: {
-						shadowColor: 'rgba(0,0,0,0.4)'
-					}
-				}
-			},
-			data: [15, 0, 20, 45, 22.1, 25, 70, 55, 76]
-		}]
-	};
-
-	myChart.setOption(option);
-	window.addEventListener('resize', function() {
-		myChart.resize();
+			yAxis: [{
+				type: 'category',
+				inverse: true,
+				axisLabel: {
+					show: true,
+					textStyle: {
+						color: '#fff'
+					},
+				},
+				splitLine: {
+					show: false
+				},
+				axisTick: {
+					show: false
+				},
+				axisLine: {
+					show: false
+				},
+				data: className
+			}, {
+				type: 'category',
+				inverse: true,
+				axisTick: 'none',
+				axisLine: 'none',
+				show: true,
+				axisLabel: {
+					textStyle: {
+						color: '#ffffff',
+						fontSize: '12'
+					},
+					formatter: function(value) {
+						return value;
+					},
+				},
+				data: data
+			}],
+			series: [{
+					name: '',
+					type: 'bar',
+					zlevel: 1,
+					itemStyle: {
+						normal: {
+							barBorderRadius: 0,
+							color: (params) => {
+								return colorList[params.dataIndex]
+							}
+						},
+					},
+					barWidth: 20,
+					data: data
+				},
+				{
+					name: '背景',
+					type: 'bar',
+					barWidth: 20,
+					barGap: '-100%',
+					data: defaultData,
+					itemStyle: {
+						normal: {
+							color: '#1B375E',
+							barBorderRadius: 0,
+						}
+					},
+				},
+			]
+		};
+		myChart.setOption(option);
+		window.addEventListener('resize', function() {
+			myChart.resize();
+		})
 	})
 
 }
 
 function char4() {
 
-	var myChart = echarts.init($("#char4")[0]);
-
-	option = {
-		grid: {
-			show: 'true',
-			borderWidth: '0'
-		},
-		tooltip: {
-			trigger: 'axis',
-			axisPointer: { // 坐标轴指示器，坐标轴触发有效
-				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+	var myChart = echarts.init(document.getElementById('chart4'));
+	// $.getJSON('json/index/char3.json', function(res) {})
+	$.getJSON('json/index/char3.json', function(res) {
+		var colorList = ['#FFE400', '#2CDEDD', '#F95A00', '#83D978', '#C7A530', '#FF8439'];
+		option = {
+			grid: {
+				bottom: 30,
 			},
-
-			formatter: function(params) {
-				var tar = params[0];
-				return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
-			}
-		},
-
-		xAxis: [{
-			type: 'category',
-			splitLine: {
-				show: false
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'none'
+				},
 			},
-			data: ['客运车', '危险品车', '网约车', '学生校车'],
-			axisLabel: {
-				show: true,
-				textStyle: {
-					color: '#fff'
+			xAxis: {
+				type: 'category',
+				data: res.titles,
+				axisLabel: {
+					color: 'white'
+				},
+				nameTextStyle: {
+					color: 'white'
+				},
+			},
+			yAxis: {
+				type: 'value',
+				name: '万吨',
+				nameTextStyle: {
+					color: 'white'
+				},
+				axisLabel: {
+					color: 'white'
+				},
+				splitLine: {
+					show: true,
+					lineStyle: {
+						color: '#7FD6FF',
+						type: 'dashed'
+					}
 				}
-			}
-
-		}],
-		yAxis: [{
-			type: 'value',
-			splitLine: {
-				show: false
 			},
-			axisLabel: {
-				show: true,
-				textStyle: {
-					color: '#fff'
-				}
-			}
-		}],
-		series: [
-
-			{
-				name: '报警数量',
+			series: [{
 				type: 'bar',
-				stack: '总量',
+				barWidth: 30,
 				itemStyle: {
 					normal: {
-						label: {
-							show: true,
-							position: 'inside'
+						barBorderRadius: 0,
+						color: (params) => {
+							return colorList[params.dataIndex]
 						}
-					}
+					},
 				},
-				data: [2900, 1200, 300, 200, 900, 300]
-			}
-		]
-	};
+				data: res.data,
+			}]
+		};
 
+		myChart.setOption(option);
+		window.addEventListener('resize', function() {
+			myChart.resize();
+		})
+	})
+
+
+}
+
+
+function char5(res) {
+	var myChart = echarts.init(document.getElementById('chartpop'));
+	var xData = []
+	var titles = res.titles
+	var json = res.data
+	for (var i = 1; i <= res.xData.length; i++) {
+		xData.push(i + "月");
+	}
+	option = {
+		grid: {
+			bottom: 40,
+		},
+		color: ["#5B8FF9", "#5AD8A6"],
+		tooltip: {
+			show: true,
+		},
+		legend: {
+			show: false,
+			right: "3%",
+			align: "right",
+			textStyle: {
+				color: "#fff",
+			},
+		},
+		grid: {
+			left: "10px",
+			right: "4%",
+			bottom: "0",
+			containLabel: true,
+		},
+		xAxis: {
+			type: "category",
+			boundaryGap: false,
+			axisLine: {
+				lineStyle: {
+					color: "#2EB1FF",
+				},
+			},
+			data: xData,
+		},
+		yAxis: {
+			type: "value",
+			name: "万吨",
+			axisLine: {
+				lineStyle: {
+					width: 0,
+					color: "#2EB1FF",
+				},
+			},
+			splitLine: {
+				lineStyle: {
+					color: "rgba(46,177,255,.1)",
+				},
+			},
+		},
+		series: [{
+			name: titles[0],
+			type: "line",
+			lineStyle: {
+				width: 3,
+				color: "#5AD8A6",
+			},
+			itemStyle: {},
+			areaStyle: {
+				color: {
+					type: "linear",
+					x: 0,
+					y: 0,
+					x2: 0,
+					y2: 1,
+					colorStops: [{
+							offset: 0,
+							color: "#5AD8A6", // 0% 处的颜色
+						},
+						{
+							offset: 1,
+							color: "transparent", // 100% 处的颜色
+						},
+					],
+					global: false, // 缺省为 false
+				},
+			},
+			smooth: true,
+			data: json[titles[0]],
+		}, {
+			name: titles[1],
+			type: "line",
+			lineStyle: {
+				width: 3,
+				color: "#F95A00",
+			},
+			itemStyle: {},
+			areaStyle: {
+				color: {
+					type: "linear",
+					x: 0,
+					y: 0,
+					x2: 0,
+					y2: 1,
+					colorStops: [{
+							offset: 0,
+							color: "#F95A00", // 0% 处的颜色
+						},
+						{
+							offset: 1,
+							color: "transparent", // 100% 处的颜色
+						},
+					],
+					global: false, // 缺省为 false
+				},
+			},
+			smooth: true,
+			data: json[titles[1]],
+		}, {
+			name: titles[2],
+			type: "line",
+			lineStyle: {
+				width: 3,
+				color: "#229AFF",
+			},
+			itemStyle: {},
+			areaStyle: {
+				color: {
+					type: "linear",
+					x: 0,
+					y: 0,
+					x2: 0,
+					y2: 1,
+					colorStops: [{
+							offset: 0,
+							color: "#229AFF", // 0% 处的颜色
+						},
+						{
+							offset: 1,
+							color: "transparent", // 100% 处的颜色
+						},
+					],
+					global: false, // 缺省为 false
+				},
+			},
+			smooth: true,
+			data: json[titles[2]],
+		}],
+	};
+	
 	myChart.setOption(option);
 	window.addEventListener('resize', function() {
 		myChart.resize();

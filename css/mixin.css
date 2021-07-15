@@ -1,6 +1,7 @@
 .wrap {
 	width: 100%;
-	height: 100%;
+	min-height: 100%;
+	background: #000d4a;
 }
 
 body {
@@ -8,7 +9,6 @@ body {
 	margin: 0px;
 	color: #222;
 	font-family: "微软雅黑";
-	background: #000d4a;
 }
 
 body {
@@ -46,7 +46,7 @@ body {
 }
 .wrap-content {
 	/* padding: 0 30px; */
-	margin: 15px 15px 5px;
+	margin: 0 15px 0;
 	flex: 1;
 	display: flex;
 	box-sizing: border-box;
@@ -70,7 +70,26 @@ body {
 	flex: 1;
 	margin-bottom: 20px;
 }
-
+.map .map-title {
+	margin-bottom: 10px;
+}
+.map .map-title .map-title-list {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.map .map-title .map-title-list .map-title-item {
+	display: flex;
+	flex-direction: column;
+	color: white;
+}
+.map .map-title .map-title-list .map-title-item b {
+	color: #16F5FF;
+	font-size: 36px;
+}
+.map .map-title .map-title-list .map-title-item .t2 {
+	color: #B5B7BF;
+}
 .wrap-center .fyl {
 	height: 110px;
 	overflow-x: auto;
@@ -147,12 +166,42 @@ body {
 }
 .legend-wrap .s1 {
 	color: #FFE400;
+	border-color: #FFE400;
 }
 .legend-wrap .s2 {
 	color: #22A4F8;
+	border-color: #22A4F8;
 }
 .legend-wrap .s3 {
 	color: #F96600;
+	border-color: #F96600;
+}
+.title-cir {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color:white;
+	margin-bottom: 20px;
+}
+.title-cir div {
+	margin: 0 15px;
+}
+.title-cir div b {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	background-color: #22A4F8;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+.title-cir .s2 {
+	background-color: #FFE400;
+}
+.title-cir .s1 {
+	background-color: #22A4F8;
+}
+.title-cir .s3 {
+	background-color: #F96600;
 }
 .border {
 	background: rgba(3, 12, 87, 0.5);

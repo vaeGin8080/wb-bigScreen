@@ -137,8 +137,38 @@ html {
 	color: #22A4F8;
 	text-align: center;
 	line-height: 30px;
+	cursor: pointer;
 }
 
+/* 弹窗 */
+.popup {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%,-50%);
+	width: 590px;
+	height: 370px;
+	background: rgba(3, 12, 87, 0.85);
+	border: 1px solid #2E4877;
+	display: none;
+}
+.popup .popup-content {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 20px;
+	height: 100%;
+}
+.popup .popup-content .box {
+	flex: 1;
+}
+.popup .popup-content .close {
+	position: absolute;
+	right: 10px;
+	top: 5px;
+	font-size: 30px;
+	color: white;
+	cursor: pointer;
+}
 /*  -- flex弹性布局 -- */
 
 .flex {
