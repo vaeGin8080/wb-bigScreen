@@ -8,6 +8,7 @@ body {
 	margin: 0px;
 	color: #222;
 	font-family: "微软雅黑";
+	background: #000d4a;
 }
 
 body {
@@ -16,16 +17,39 @@ body {
 
 .wrap-head {
 	height: 60px;
+	padding: 0 30px;
 }
-
+.head-left {
+	padding-left: 50px;
+	color: white;
+}
+.head-center {
+	flex: 1;
+	height: 100%;
+	max-width: 1200px;
+	background: url(../images/index-title-bg.png) center;
+}
+.head-right {
+	color: white;
+	padding-right: 50px;
+}
+.head-center {
+	font-size: 36px;
+	font-family: PingFang SC;
+	font-weight: bold;
+	color: #16F5FF;
+	line-height: 25px;
+}
+.wrap-c {
+	background: url(../images/index-wrap-bg.png) 40px center;
+	background-size: cover;
+}
 .wrap-content {
 	/* padding: 0 30px; */
 	margin: 15px 15px 5px;
 	flex: 1;
 	display: flex;
 	box-sizing: border-box;
-	background: url(../images/index-wrap-bg.png) center;
-	background-size: cover;
 }
 .box-top {
 	height: 49%;
