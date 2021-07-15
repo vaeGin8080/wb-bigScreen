@@ -1,0 +1,139 @@
+.wrap {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	padding: 0px;
+	margin: 0px;
+	color: #222;
+	font-family: "微软雅黑";
+}
+
+body {
+	color: #666;
+}
+
+.wrap-head {
+	height: 60px;
+}
+
+.wrap-content {
+	/* padding: 0 30px; */
+	margin: 15px 15px 5px;
+	flex: 1;
+	display: flex;
+	box-sizing: border-box;
+	background: url(../images/index-wrap-bg.png) center;
+	background-size: cover;
+}
+.box-top {
+	height: 49%;
+}
+.box-bottom {
+	height: 49%;
+	margin-top: 12px;
+}
+.wrap-center {
+	display: flex;
+	flex-direction: column;
+	box-sizing: border-box;
+	height: 100%;
+	/* margin: 0 30px; */
+}
+
+.wrap-center .map {
+	flex: 1;
+	margin-bottom: 20px;
+}
+
+.wrap-center .fyl {
+	height: 110px;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+.wrap-center .fyl ul{
+	max-width: 100%;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+}
+.wrap-center .fyl a {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-width: 80px;
+	height: 80px;
+	background: rgba(22, 245, 255, 0.15);
+	border: 2px solid #16F5FF;
+	opacity: 0.7;
+	border-radius: 4px;
+}
+.wrap-center .fyl a img {
+	width: 25px;
+	height: 25px;
+}
+.wrap-center .fyl a span {
+	color: #7A98DB;
+	margin-top: 9px;
+}
+.wrap-center .active {
+	background: linear-gradient(0deg, #FFA128, #B57700, #FFA128) !important;
+	border: 1px solid #FFEC4C !important;
+}
+.wrap-center .active span{
+	color: white !important;
+}
+.box-wrap {
+	height: 100%;
+}
+.legend-wrap {
+	min-width: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.legend-item {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 0;
+	border-bottom: 1px dashed #C9CDD6;
+}
+.legend-item>div {
+	display: flex;
+	align-items: center;
+}
+.legend-item b {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	border: 3px solid #22A4F8;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+.legend-item span {
+	font-size: 12px;
+	color: white;
+}
+.legend-item span:first-child {
+	color: white;
+}
+.legend-wrap .s1 {
+	color: #FFE400;
+}
+.legend-wrap .s2 {
+	color: #22A4F8;
+}
+.legend-wrap .s3 {
+	color: #F96600;
+}
+.border {
+	background: rgba(3, 12, 87, 0.5);
+	border: 1px solid #2E4877;
+	box-shadow: 0px 0px 16px 4px rgba(51, 156, 179, 0.36) inset;
+	position: relative;
+	padding: 10px 20px 10px;
+}
